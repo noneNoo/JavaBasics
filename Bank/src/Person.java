@@ -53,32 +53,16 @@ public class Person {
     // 두 번째 파라미터: 이체할 금액 (정수)
     // 리턴 : 성공여부 (불린)
     public boolean transfer(Person to, int amount) {
-        if(amount < 0 || amount > account.getBalance()) {
-            System.out.println("false - from: " + getName() + ", to: " + to.getName() + ", amount: " + amount + ", balance: " + account.getBalance());
-            return false;
-        }
-        // 내 계좌 돈 감소
-        getAccount().setBalance(account.getBalance() - amount);
-        // 받는 사람 은행잔액에 돈 추가
-        to.account.setBalance(to.account.getBalance() + amount);
-        System.out.println("true - from: " + getName() + ", to: " + to.getName() + ", amount: " + amount + ", balance: " + account.getBalance());
-        return true;
+        // 내 계좌의 transfer 메서드를 이용하여
+        // 첫 번째 인자에 to로 넘겨받은 사람의 계좌를 넘겨준다.
+        return account.transfer(to.account, amount);
     }
 
 //    // 첫 번째 파라미터: 받는 사람의 계정 (BankAccount)
 //    // 두 번째 파라미터: 이체할 금액 (정수)
 //    // 리턴 : 성공여부 (불린)
     public boolean transfer(BankAccount to, int amount) {
-        if(amount < 0 || amount > account.getBalance()) {
-            System.out.println("false - from: " + getName() + ", to: " + to.getOwner().getName() + ", amount: " + amount + ", balance: " + account.getBalance());
-            return false;
-        }
-        // 내 계좌 돈 감소
-        getAccount().setBalance(account.getBalance() - amount);
-        // 받는 사람 은행잔액에 돈 추가
-        to.setBalance(to.getBalance() + amount);
-        System.out.println("true - from: " + getName() + ", to: " + to.getOwner().getName() + ", amount: " + amount + ", balance: " + account.getBalance());
-        return true;
+        return account.transfer(to, amount);
     }
 
 }

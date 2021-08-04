@@ -69,18 +69,29 @@ public class BankAccount {
     // 파라미터: 받는 사람(person객체), 이체할 금액(int)
     // 리턴: 성공 여부(boolean)
     boolean transfer(Person to, int amount) {
+        boolean success;
         if(amount < 0 || amount > balance) {
-            System.out.println("false - from: " + getOwner().getName() + ", to: " + to.getName() + ", amount: " + amount + ", balance: " + getBalance());
-            return false;
+            success = false;
+            System.out.println(success +
+                    " - from: " + owner.getName() +
+                    ", to: " + to.getName() +
+                    ", amount: " + amount +
+                    ", balance: " + balance);
+        } else {
+            success = true;
+            // 나의 계좌 잔액을 감소
+            balance = balance - amount;
+            // 받는 사람의 잔액을 증가
+            to.getAccount().balance = balance + amount;
+            // 메세지 출력
+            System.out.println(success +
+                    " - from: " + owner.getName() +
+                    ", to: " + to.getName() +
+                    ", amount: " + amount +
+                    ", balance: " + balance);
         }
-        // 나의 계좌 잔액을 감소
-        setBalance(balance - amount);
-        // 받는 사람의 잔액을 증가
-        to.getAccount().setBalance(to.getAccount().balance + amount);
-        // 메세지 출력
-        System.out.println("true - from: " + getOwner().getName() + ", to: " + to.getName() + ", amount: " + amount + ", balance: " + getBalance());
+            return success;
 
-        return true;
     }
 
     // 계좌 이체 메소드 (2. 첫 번째 인자로 은행계좌를 받는 경우)
@@ -88,18 +99,28 @@ public class BankAccount {
     // 리턴 : 성공여부 (불린)
 
     public boolean transfer(BankAccount to, int amount) {
+        boolean success;
         if(amount < 0 || amount > balance) {
-            System.out.println("false - from: " + getOwner().getName() + ", to: " + to.getOwner().getName() + ", amount: " + amount + ", balance: " + getBalance());
-            return false;
+            success = false;
+            System.out.println(success +
+                    " - from: " + owner.getName() +
+                    ", to: " + to.getOwner().getName() +
+                    ", amount: " + amount +
+                    ", balance: " + getBalance());
+        } else {
+            success = true;
+            // 나의 계좌 잔액을 감소
+            setBalance(balance - amount);
+            // 받는 계좌의 잔액을 증가
+            to.setBalance(to.balance + amount);
+            // 메세지 출력
+            System.out.println(success +
+                    " - from: " + owner.getName() +
+                    ", to: " + to.getOwner().getName() +
+                    ", amount: " + amount +
+                    ", balance: " + getBalance());
+
         }
-
-        // 나의 계좌 잔액을 감소
-        setBalance(balance - amount);
-        // 받는 계좌의 잔액을 증가
-        to.setBalance(to.balance + amount);
-        // 메세지 출력
-        System.out.println("true - from: " + getOwner().getName() + ", to: " + to.getOwner().getName() + ", amount: " + amount + ", balance: " + getBalance());
-
-        return true;
+        return success;
     }
 }
