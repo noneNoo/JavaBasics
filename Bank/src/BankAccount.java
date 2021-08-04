@@ -24,7 +24,7 @@ public class BankAccount {
     // owner의 현금을 통장잔고로 입금하는 메서드.
     // 파라미터: 입금할 액수 (int)
     // 리턴: 성공 여부 (boolean)
-    boolean deposit (int amount) {
+    public boolean deposit (int amount) {
 
         // 입금액이 음수거나, 입금자의 현금액보다 클 경우
         if(amount < 0 || owner.getCashAmount() < amount) {
@@ -34,16 +34,14 @@ public class BankAccount {
 
         // owner의 현금액을 입금액만큼 줄이고 잔액을 추가한다
         owner.setCashAmount(owner.getCashAmount() - amount);
-//        owner.cashAmount = owner.cashAmount - amount;
         balance = balance + amount;
 
         System.out.println(amount + "원 입금하였습니다. 잔고: " + balance + "원, 현금: " + owner.getCashAmount() + "원");
         return true;
     }
 
-    // 달러 입금 메소드
-    public boolean depositUSD(double amount, double exchangeRate) {
-        // 환율 적용
+    // 환율 적용 입금 메소드 (메소드 오버로딩)
+    public boolean deposit(double amount, double exchangeRate) {
         return deposit((int)(amount * exchangeRate));
     }
 
@@ -69,7 +67,7 @@ public class BankAccount {
     }
 //
 //    // 계좌 이체 메소드
-//    // 파라미터: 받는 사람(person객체체), 체할 금액(int)
+//    // 파라미터: 받는 사람(person객체), 체할 금액(int)
 //    // 리턴: 성공 여부(boolean)
 //
 //    boolean transfer(Person to, int amount) {

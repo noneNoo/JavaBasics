@@ -20,18 +20,13 @@ public class BankDriver {
         BankAccount a2 = new BankAccount();
 
         // 속성 부여
-        // a1.balance = 100000;
-        // a2.balance = 500000;
         a1.setBalance(100000);
         a2.setBalance(500000);
 
         // 객체끼리 연결
-        // p1(사람) 에게 a1(계좌)를 지급.
         p1.setAccount(a1);
         p2.setAccount(a2);
         // 은행의 예금주를 선언
-        // a1.owner = p1;
-        // a2.owner = p2;
         a1.setOwner(p1);
         a2.setOwner(p2);
 
@@ -41,6 +36,8 @@ public class BankDriver {
         a2.withdraw(170000);
         a2.deposit(620000);
         a2.withdraw(890000);
+
+        a2.deposit(3.0,1142.63);
 
     }
 }
