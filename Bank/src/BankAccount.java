@@ -1,5 +1,4 @@
 public class BankAccount {
-    // class에 바로 변수를 만들 시 객체의 속성을 담당한다.
     //잔액
     private int balance;
 
@@ -66,11 +65,41 @@ public class BankAccount {
         return true;
     }
 //
-//    // 계좌 이체 메소드
-//    // 파라미터: 받는 사람(person객체), 체할 금액(int)
-//    // 리턴: 성공 여부(boolean)
-//
-//    boolean transfer(Person to, int amount) {
-//
-//    }
+    // 계좌 이체 메소드 (1. 첫 번째 인자로 이체할 사람을 받을 경우)
+    // 파라미터: 받는 사람(person객체), 이체할 금액(int)
+    // 리턴: 성공 여부(boolean)
+    boolean transfer(Person to, int amount) {
+        if(amount < 0 || amount > balance) {
+            System.out.println("false - from: " + getOwner().getName() + ", to: " + to.getName() + ", amount: " + amount + ", balance: " + getBalance());
+            return false;
+        }
+        // 나의 계좌 잔액을 감소
+        setBalance(balance - amount);
+        // 받는 사람의 잔액을 증가
+        to.getAccount().setBalance(to.getAccount().balance + amount);
+        // 메세지 출력
+        System.out.println("true - from: " + getOwner().getName() + ", to: " + to.getName() + ", amount: " + amount + ", balance: " + getBalance());
+
+        return true;
+    }
+
+    // 계좌 이체 메소드 (2. 첫 번째 인자로 은행계좌를 받는 경우)
+    // 파라미터: 받는 사람의 계정 (BankAccount), 이체할 금액 (정수)
+    // 리턴 : 성공여부 (불린)
+
+    public boolean transfer(BankAccount to, int amount) {
+        if(amount < 0 || amount > balance) {
+            System.out.println("false - from: " + getOwner().getName() + ", to: " + to.getOwner().getName() + ", amount: " + amount + ", balance: " + getBalance());
+            return false;
+        }
+
+        // 나의 계좌 잔액을 감소
+        setBalance(balance - amount);
+        // 받는 계좌의 잔액을 증가
+        to.setBalance(to.balance + amount);
+        // 메세지 출력
+        System.out.println("true - from: " + getOwner().getName() + ", to: " + to.getOwner().getName() + ", amount: " + amount + ", balance: " + getBalance());
+
+        return true;
+    }
 }

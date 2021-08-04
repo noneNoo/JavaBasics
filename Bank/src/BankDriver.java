@@ -32,12 +32,17 @@ public class BankDriver {
 
         // 입금 메소드 테스트 (나의 현금을 나의 통장잔고로 입금)
         // 출금 메소드 테스트 (나의 통장잔고를 나의 현금으로 출금)
-        a2.deposit(30000);
-        a2.withdraw(170000);
-        a2.deposit(620000);
-        a2.withdraw(890000);
+//        a2.deposit(30000);
+//        a2.withdraw(170000);
+//        a2.deposit(620000);
+//        a2.withdraw(890000);
 
-        a2.deposit(3.0,1142.63);
+        a2.transfer(a1, 200000);
+        a1.transfer(p2, 150000);
+        p2.transfer(a1, 270000); // 이거작업중
+        p1.transfer(p2, 130000);
+
+//        a2.deposit(3.0,1142.63);
 
     }
 }
