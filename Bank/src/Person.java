@@ -10,6 +10,32 @@ public class Person {
     // 소유 계좌 (bankaccount 객체를 연결한다)
     private BankAccount account;
 
+    // 생성자 기본 틀
+    public Person(String pName, int pAge, int pCashAmount) {
+        name = pName;
+        if(pAge < 0) {
+            age= 12;
+        } else {
+            age = pAge;
+        }
+        if (pCashAmount <= 0) {
+           cashAmount = 0;
+        } else {
+            cashAmount = pCashAmount;
+        }
+
+    }
+    // 생성자 오버로딩 (마지막 인자를 받지 않을 시 현금 0원으로 정의)
+    public Person(String pName, int pAge) {
+        name = pName;
+        if(pAge < 0) {
+            age= 12;
+        } else {
+            age= pAge;
+        }
+        cashAmount = 0;
+    }
+
     // 계좌 getter, setter
     public void setAccount(BankAccount PublicAccount) {
         account = PublicAccount;
@@ -64,5 +90,4 @@ public class Person {
     public boolean transfer(BankAccount to, int amount) {
         return account.transfer(to, amount);
     }
-
 }

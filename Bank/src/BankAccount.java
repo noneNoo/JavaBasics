@@ -12,6 +12,31 @@ public class BankAccount {
     // 계좌의 주인 (person 객체를 연결한다)
     private Person owner;
 
+    // 생산자 생성
+    // 1. 잔액을 인자로 받을 시
+    public BankAccount(int pBalance) {
+        if (pBalance < 0) {
+            balance = 0;
+        } else {
+            balance = pBalance;
+        }
+    }
+    // 2. 소유자 객체를 인자로 받을 시
+    public BankAccount(Person pOwner) {
+        owner = pOwner;
+        balance = 0;
+    }
+
+    // 3. 잔액과 소유자를 함께 받을 시
+    public BankAccount(int pBalance, Person pOwner){
+        owner = pOwner;
+        if (pBalance < 0) {
+            balance = 0;
+        } else {
+            balance = pBalance;
+        }
+    }
+
     public void setOwner(Person newOwner) {
         owner = newOwner;
     }
@@ -24,7 +49,6 @@ public class BankAccount {
     // 파라미터: 입금할 액수 (int)
     // 리턴: 성공 여부 (boolean)
     public boolean deposit (int amount) {
-
         // 입금액이 음수거나, 입금자의 현금액보다 클 경우
         if(amount < 0 || owner.getCashAmount() < amount) {
             System.out.println("입금 실패입니다. 잔고: "+balance+"원, 현금: " + owner.getCashAmount()+"원");
@@ -82,7 +106,8 @@ public class BankAccount {
             // 나의 계좌 잔액을 감소
             balance = balance - amount;
             // 받는 사람의 잔액을 증가
-            to.getAccount().balance = balance + amount;
+//            to.getAccount().balance = balance + amount; 이 코드가 문제였군;;
+            to.getAccount().setBalance(to.getAccount().getBalance()+amount);
             // 메세지 출력
             System.out.println(success +
                     " - from: " + owner.getName() +
@@ -90,6 +115,8 @@ public class BankAccount {
                     ", amount: " + amount +
                     ", balance: " + balance);
         }
+        System.out.println("나의 잔액:" + balance);
+
             return success;
 
     }
@@ -99,6 +126,7 @@ public class BankAccount {
     // 리턴 : 성공여부 (불린)
 
     public boolean transfer(BankAccount to, int amount) {
+        System.out.println(balance);
         boolean success;
         if(amount < 0 || amount > balance) {
             success = false;
@@ -110,7 +138,7 @@ public class BankAccount {
         } else {
             success = true;
             // 나의 계좌 잔액을 감소
-            setBalance(balance - amount);
+            balance = balance - amount;
             // 받는 계좌의 잔액을 증가
             to.setBalance(to.balance + amount);
             // 메세지 출력

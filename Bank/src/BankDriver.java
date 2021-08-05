@@ -1,48 +1,40 @@
 public class BankDriver {
     public static void main(String[] args) {
-        // 인스턴스 생성 (사람)
-        Person p1 = new Person();
-        Person p2 = new Person();
+        // 인스턴스 생성
 
-        // 속성 부여
-        p1.setName("김신의");
-        p1.setAge(28);
+        // 사람 생성
+        // 생성자에서 바로 속성 부여
+        Person p1 = new Person("김신의", 28);
         p1.setCashAmount(30000);
+        Person p2 = new Person("박소이",24, 100000);
 
-
-        p2.setName("박소이");
-        p2.setAge(17);
-        p2.setCashAmount(100000);
 
         // 은행 계좌 생성
-        // (메서드들도 함께 생성된다)
-        BankAccount a1 = new BankAccount();
-        BankAccount a2 = new BankAccount();
+//        BankAccount a1 = new BankAccount();
+//        BankAccount a2 = new BankAccount();
 
-        // 속성 부여
+        // 계좌 생성과 동시에 사람 연결
+        BankAccount a1 = new BankAccount(p1);
         a1.setBalance(100000);
-        a2.setBalance(500000);
+
+        BankAccount a2 = new BankAccount(500000, p2);
+
 
         // 객체끼리 연결
+        // 이 과정을 this로...? 뺄 수 있지 않을까~
         p1.setAccount(a1);
         p2.setAccount(a2);
-        // 은행의 예금주를 선언
-        a1.setOwner(p1);
-        a2.setOwner(p2);
 
-        // 입금 메소드 테스트 (나의 현금을 나의 통장잔고로 입금)
-        // 출금 메소드 테스트 (나의 통장잔고를 나의 현금으로 출금)
-//        a2.deposit(30000);
-//        a2.withdraw(170000);
-//        a2.deposit(620000);
-//        a2.withdraw(890000);
+//        a2.transfer(a1, 200000);  // 여기테스트해야함
+//        a1.transfer(p2, 150000);
+//        p2.transfer(a1, 270000); // 여기오류남
+//        p1.transfer(p2, 130000);
 
+
+        // 계좌 이체 테스트
         a2.transfer(a1, 200000);
         a1.transfer(p2, 150000);
-        p2.transfer(a1, 270000); // 이거작업중
+        p2.transfer(a1, 270000);
         p1.transfer(p2, 130000);
-
-//        a2.deposit(3.0,1142.63);
-
     }
 }
